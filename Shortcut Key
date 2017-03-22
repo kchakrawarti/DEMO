@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <script src="shortcut.js"></script>
+	
+	<script>
+	shortcut.add("ctrl+a", 
+	function() { 
+	alert("kaluram chakrawarti"); 
+	}, 
+	{ 'type':'keydown', 'propagate':false, 'target':document} 
+	);  
+	 function disableCtrlKeyCombination(e)
+        {
+                //list all CTRL + key combinations you want to disable
+                var forbiddenKeys = new Array("a", "s", "c");
+                var key;
+                var isCtrl;
+
+                if(window.event)
+                {
+                        key = window.event.keyCode;     //IE
+                        if(window.event.ctrlKey)
+                                isCtrl = true;
+                        else
+                                isCtrl = false;
+                }
+                else
+                {
+                        key = e.which;     //firefox
+                        if(e.ctrlKey)
+                                isCtrl = true;
+                        else
+                                isCtrl = false;
+                }
+
+                //if ctrl is pressed check if other key is in forbidenKeys array
+                if(isCtrl)
+                {
+                    for (i = 0; i < forbiddenKeys.length; i++)
+                        {
+                                //case-insensitive comparation
+                            if (forbiddenKeys[i].toLowerCase() == String.fromCharCode(key).toLowerCase())
+                                {
+//                                    alert("Key combination CTRL + "
+//                                                + String.fromCharCode(key)
+//                                                + " has been disabled.");                                    
+                                        return false;
+                                }
+                        }
+                }
+                return true;
+        }
+	</script>
+  </head>
+<body onkeypress="return disableCtrlKeyCombination(event);" onkeydown="return disableCtrlKeyCombination(event);">
+<div style="padding:30px">
+  <div class="row-fluid">
+    <h2>AngularJS and services</h2>
+    <h3>Keyboard Shorcut Manager as a Service</h3>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      <p class="text-success">You can use the followin shortcut combination to test :</p>
+      <ul>
+        <li>a: there is two handler on a</li>
+        <li>ctrl+a</li>
+        <li>ctrl+shift+d</li>
+        <li>z with handler disable when focus input or textarea</li>
+      </ul>
+      <hr />
+      <input type="text" id="inputTest" placeholder="Try shorcut here" />
+      <textarea id="textareaTest" placeholder="Try shorcut here"></textarea>
+    </div>
+    <div class="span6">
+      <h3>Logs</h3>
+      <ul>
+        <li ng-repeat="log in logs" ng-cloak>
+          {{log}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
